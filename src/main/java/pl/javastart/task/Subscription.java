@@ -43,4 +43,5 @@ public class Subscription extends Agreement {
         System.out.printf("Liczba sekund rozmowy: %d\n", getSecCount());
         System.out.printf("Na koncie zostało: ABONAMENT BEZ LIMITU, mieięczna opłąta %.2f zł.\n\n", monthlyPayment);
     }
+
 }

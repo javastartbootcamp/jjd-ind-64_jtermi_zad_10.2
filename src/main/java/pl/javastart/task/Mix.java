@@ -118,4 +118,5 @@ public class Mix extends Agreement {
         System.out.printf("SMSów: %d, MMSów: %d, Darmowych sekund: %d\n", smsLimit, mmsLimit, secLimit);
         System.out.printf("Na koncie zostało: %.2f zł.\n\n", getAccountState());
     }
+
 }

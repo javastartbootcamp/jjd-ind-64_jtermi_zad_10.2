@@ -23,5 +23,4 @@ public class Phone {
     public void printAccountState() {
         agreement.printAccountInformation();
     }
-
 }

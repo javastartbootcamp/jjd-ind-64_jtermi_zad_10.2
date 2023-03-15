@@ -64,4 +64,5 @@ public class Prepaid extends Agreement {
         System.out.printf("Liczba sekund rozmowy: %d\n", getSecCount());
         System.out.printf("Na koncie zostało: %.2f zł\n\n", getAccountState());
     }
+
 }

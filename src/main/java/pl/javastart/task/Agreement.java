@@ -57,5 +57,4 @@ abstract class Agreement {
 
     public void printAccountInformation() {
     }
-
 }
