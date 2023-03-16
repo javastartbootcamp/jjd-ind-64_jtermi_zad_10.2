@@ -1,4 +1,4 @@
-package pl.javastart.task;
+package pl.javastart.task.internal;
 
 public class Subscription extends Agreement {
 
@@ -7,40 +7,29 @@ public class Subscription extends Agreement {
         this.monthlyPayment = monthlyPayment;
     }
 
-    private double monthlyPayment;
-
-    public double getMonthlyPayment() {
-        return monthlyPayment;
-    }
-
-    public void setMonthlyPayment(double monthlyPayment) {
-        this.monthlyPayment = monthlyPayment;
-    }
+    double monthlyPayment;
 
     @Override
     public void sendSms() {
-        setSmsCount(getSmsCount() + 1);
+        smsCount++;
         System.out.println("SMS wysłany\n");
     }
 
     @Override
     public void sendMms() {
-        setMmsCount(getMmsCount() + 1);
+        mmsCount++;
         System.out.println("MMS wysłany\n");
     }
 
     @Override
     public void makePhoneCall(int seconds) {
-        setSecCount(getSecCount() + seconds);
+        secCount += seconds;
         System.out.printf("Rozmowa trwała %d sekund\n\n", seconds);
     }
 
     @Override
     public void printAccountInformation() {
-        System.out.println("=== STAN KONTA ===");
-        System.out.printf("Wysłanych SMSów: %d\n", getSmsCount());
-        System.out.printf("Wysłanych MMSów: %d\n", getMmsCount());
-        System.out.printf("Liczba sekund rozmowy: %d\n", getSecCount());
+        super.printAccountInformation();
         System.out.printf("Na koncie zostało: ABONAMENT BEZ LIMITU, mieięczna opłąta %.2f zł.\n\n", monthlyPayment);
     }
 
