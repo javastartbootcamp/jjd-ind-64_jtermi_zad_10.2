@@ -2,12 +2,12 @@ package pl.javastart.task.internal;
 
 public class Subscription extends Agreement {
 
+    double monthlyPayment;
+
     public Subscription(double monthlyPayment) {
         super();
         this.monthlyPayment = monthlyPayment;
     }
-
-    double monthlyPayment;
 
     @Override
     public void sendSms() {
@@ -22,15 +22,13 @@ public class Subscription extends Agreement {
     }
 
     @Override
-    public void makePhoneCall(int seconds) {
+    public int makePhoneCall(int seconds) {
         secCount += seconds;
-        System.out.printf("Rozmowa trwała %d sekund\n\n", seconds);
+        return seconds;
     }
 
     @Override
-    public void printAccountInformation() {
-        super.printAccountInformation();
-        System.out.printf("Na koncie zostało: ABONAMENT BEZ LIMITU, mieięczna opłąta %.2f zł.\n\n", monthlyPayment);
+    public String getAccountInformation() {
+        return "Na koncie zostało: ABONAMENT BEZ LIMITU, mieięczna opłąta " + monthlyPayment + "zł.\n\n";
     }
-
 }

@@ -21,6 +21,9 @@ public class Phone {
     }
 
     public void printAccountState() {
-        agreement.printAccountInformation();
+        System.out.println("=== STAN KONTA ===\nWysłanych SMSów: " + agreement.smsCount
+                + "\nWysłanych MMSów: " + agreement.mmsCount
+                + "\nLiczba sekund rozmowy: " +  agreement.secCount + "\n");
+        System.out.println(agreement.getAccountInformation());
     }
 }

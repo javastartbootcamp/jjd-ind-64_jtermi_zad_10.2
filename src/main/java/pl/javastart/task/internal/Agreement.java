@@ -6,22 +6,11 @@ public abstract class Agreement {
     int mmsCount = 0;
     int secCount = 0;
 
-    public Agreement() {
-    }
+    public abstract void sendSms();
 
-    public void sendSms() {
-    }
+    public abstract void sendMms();
 
-    public void sendMms() {
-    }
+    public abstract int makePhoneCall(int seconds);
 
-    public void makePhoneCall(int seconds) {
-    }
-
-    public void printAccountInformation() {
-        System.out.println("=== STAN KONTA ===");
-        System.out.printf("Wysłanych SMSów: %d\n", smsCount);
-        System.out.printf("Wysłanych MMSów: %d\n", mmsCount);
-        System.out.printf("Liczba sekund rozmowy: %d\n", secCount);
-    }
+    public abstract String getAccountInformation();
 }

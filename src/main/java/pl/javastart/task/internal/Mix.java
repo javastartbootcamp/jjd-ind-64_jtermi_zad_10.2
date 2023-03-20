@@ -36,23 +36,22 @@ public class Mix extends Prepaid {
     }
 
     @Override
-    public void makePhoneCall(int seconds) {
+    public int makePhoneCall(int seconds) {
 
         if (secLimit <= 0 && accountState < (pricePerMin / 60)) {
             System.out.println("Brak środków na koncie\n");
-            return;
+            return 0;
         }
-        int secondsFromLimit = 0;
-        if (secLimit > 0) {
-            secondsFromLimit = useSecondsFromLimit(seconds);
+
+        int remainingSeconds = seconds - useSecondsFromLimit(seconds);
+
+        if (remainingSeconds > 0) {
+            remainingSeconds = super.useSecondsFromAccount(remainingSeconds);
         }
-        int secondsFromAccount = 0;
-        if (accountState > 0 && secondsFromLimit < seconds) {
-            secondsFromAccount = super.useSecondsFromAccount(seconds - secondsFromLimit);
-        }
-        int callDuration = secondsFromAccount + secondsFromLimit;
+
+        int callDuration = seconds - remainingSeconds;
         secCount += callDuration;
-        System.out.printf("Rozmowa trwała %d sekund\n\n", callDuration);
+        return callDuration;
     }
 
     private int useSecondsFromLimit(int seconds) {
@@ -64,9 +63,9 @@ public class Mix extends Prepaid {
     }
 
     @Override
-    public void printAccountInformation() {
-        super.printAccountInformation();
-        System.out.println("Pozostało do wykorzystania:");
-        System.out.printf("SMSów: %d, MMSów: %d, Darmowych sekund: %d\n\n", smsLimit, mmsLimit, secLimit);
+    public String getAccountInformation() {
+        return super.getAccountInformation()
+                + "Pozostało do wykorzystania: "
+                + "SMSów: " + smsLimit + ", MMSów: " + mmsLimit + ", Darmowych sekund: " + secLimit;
     }
 }

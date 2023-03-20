@@ -21,9 +21,9 @@ public class Prepaid extends Agreement {
             smsCount++;
             accountState -= smsPrice;
             System.out.println("SMS wysłany\n");
-            return;
+        } else {
+            System.out.println("Nie udało się wysłać SMSa\n");
         }
-        System.out.println("Nie udało się wysłać SMSa\n");
     }
 
     @Override
@@ -32,20 +32,21 @@ public class Prepaid extends Agreement {
             mmsCount++;
             accountState -= mmsPrice;
             System.out.println("MMS wysłany\n");
-            return;
+        } else {
+            System.out.println("Nie udało się wysłać MMSa\n");
         }
-        System.out.println("Nie udało się wysłać MMSa\n");
     }
 
     @Override
-    public void makePhoneCall(int seconds) {
+    public int makePhoneCall(int seconds) {
+        int callDuration = 0;
         if (accountState <= 0) {
             System.out.println("Niewystarczająca ilość środków na koncie\n");
         } else {
-            int callDuration = useSecondsFromAccount(seconds);
+            callDuration = useSecondsFromAccount(seconds);
             secCount += callDuration;
-            System.out.printf("Rozmowa trwała %d sekund\n\n", callDuration);
         }
+        return callDuration;
     }
 
     int useSecondsFromAccount(int seconds) {
@@ -61,8 +62,7 @@ public class Prepaid extends Agreement {
     }
 
     @Override
-    public void printAccountInformation() {
-        super.printAccountInformation();
-        System.out.printf("Na koncie zostało: %.2f zł\n", accountState);
+    public String getAccountInformation() {
+        return "Na koncie zostało: " + accountState + "zł\n";
     }
 }
