@@ -14,41 +14,33 @@ public class Mix extends Prepaid {
     }
 
     @Override
-    public void sendSms() {
+    public boolean sendSms() {
         if (smsLimit > 0) {
-            System.out.println("SMS wysłany\n");
             smsLimit--;
             smsCount++;
         } else {
-            super.sendSms();
+            return super.sendSms();
         }
+        return true;
     }
 
     @Override
-    public void sendMms() {
+    public boolean sendMms() {
         if (mmsLimit > 0) {
-            System.out.println("MMS wysłany\n");
             mmsLimit--;
             mmsCount++;
         } else {
-            super.sendMms();
+            return super.sendMms();
         }
+        return true;
     }
 
     @Override
     public int makePhoneCall(int seconds) {
-
-        if (secLimit <= 0 && accountState < (pricePerMin / 60)) {
-            System.out.println("Brak środków na koncie\n");
-            return 0;
-        }
-
         int remainingSeconds = seconds - useSecondsFromLimit(seconds);
-
         if (remainingSeconds > 0) {
-            remainingSeconds = super.useSecondsFromAccount(remainingSeconds);
+            remainingSeconds -= super.useSecondsFromAccount(remainingSeconds);
         }
-
         int callDuration = seconds - remainingSeconds;
         secCount += callDuration;
         return callDuration;

@@ -10,15 +10,15 @@ public class Subscription extends Agreement {
     }
 
     @Override
-    public void sendSms() {
+    public boolean sendSms() {
         smsCount++;
-        System.out.println("SMS wysłany\n");
+        return true;
     }
 
     @Override
-    public void sendMms() {
+    public boolean sendMms() {
         mmsCount++;
-        System.out.println("MMS wysłany\n");
+        return true;
     }
 
     @Override

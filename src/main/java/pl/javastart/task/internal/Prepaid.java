@@ -16,49 +16,44 @@ public class Prepaid extends Agreement {
     }
 
     @Override
-    public void sendSms() {
+    public boolean sendSms() {
         if (accountState >= smsPrice) {
             smsCount++;
             accountState -= smsPrice;
-            System.out.println("SMS wysłany\n");
+            return true;
         } else {
-            System.out.println("Nie udało się wysłać SMSa\n");
+            return false;
         }
     }
 
     @Override
-    public void sendMms() {
+    public boolean sendMms() {
         if (accountState > 0) {
             mmsCount++;
             accountState -= mmsPrice;
-            System.out.println("MMS wysłany\n");
+            return true;
         } else {
-            System.out.println("Nie udało się wysłać MMSa\n");
+            return false;
         }
     }
 
     @Override
     public int makePhoneCall(int seconds) {
-        int callDuration = 0;
-        if (accountState <= 0) {
-            System.out.println("Niewystarczająca ilość środków na koncie\n");
-        } else {
-            callDuration = useSecondsFromAccount(seconds);
-            secCount += callDuration;
-        }
+        int callDuration = useSecondsFromAccount(seconds);
+        secCount += callDuration;
         return callDuration;
     }
 
     int useSecondsFromAccount(int seconds) {
         double pricePerSec = pricePerMin / 60;
         double callPrice = seconds * pricePerSec;
-
+        int callDuration = seconds;
         if (accountState < callPrice) {
-            seconds = (int) (accountState / pricePerSec);
-            callPrice = seconds * pricePerSec;
+            callDuration = (int) (accountState / pricePerSec);
+            callPrice = callDuration * pricePerSec;
         }
         accountState -= callPrice;
-        return seconds;
+        return callDuration;
     }
 
     @Override
